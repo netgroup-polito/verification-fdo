@@ -1,0 +1,782 @@
+(* FIDO FDO - version 1.1 *)
+
+(* Instead of the reseller, we have now attacker. Device accepts both an OV with 2 entries and 3 entries.
+   Owner trusts pkman. Attacker does not have a second device.
+   
+   In the DI phase, the device stores a copy of the hash(serverCert). It will use this value in the TO1 phase to authenticate the server
+   
+   Countermeasures:
+   - in TO0 only a specific owner can update the entry stored on the server (the owner whose public key is already stored on the server).
+     When the server receives the request, it verifies if already exists an entry for that GUID. If yes, it retrieves the corresponding 
+     pkowner already stored and checks if it is equal to the one in the new request. If yes, the entry is updated. If not, the request
+     is rejected. If the entry does not exist yet on the server, the request is accepted and the entry is added.
+     So basically, the first arriving on the server will have its pkey associated to the OV of the device
+   - the public key of the server for now is passed as function parameter -> TODO create certificate for the server, whose hash should 
+     be inserted in the OV. The server will use the corresponding private key to authenticate
+   - In TO0, the server in response to the owner sends the AcceptOwner message. We added as a parameter of this message, the pkowner with 
+     which the server has succesfully completed the TO0 phase (so that the owner can verify that it is actually its public key)-
+     NOTE: maybe to avoid privacy issues we can  insert a nonce -> for example in this case (instead of the ownerpk we inserted to1dTO0Hash)
+     TODO check if it works
+   - The AcceptOwner message is signed by the server, so the attacker cannot modify this message
+     -> we have authentication of the server in the TO0 phase
+   - In the TO0 phase, the owner receiving the AcceptOwner verifies the signature of the server. Then verifies if the to1dHash corresponds.
+     If yes, then it turns on the device
+   - To synchronize the device and the owner we used a private channel. The device is waiting for an in on the channel that is sent by the
+     owner when the TO0 protocol completes succesfully
+   - Also in the TO1 phase, there is authentication of the server to the device. So, the server signs the response to the device and the
+     device checks the signature
+     
+*)
+
+free ch:channel. 			(* Public channel *)
+free ch_dev_man:channel [private].	(* Private channel between the Device and the Manufacturer *)
+free ch_sync:channel [private].		(* Synchronization channel between the Owner and the Device *)
+
+type pkey.
+type skey.
+type result.
+type G.
+
+const g:G.
+
+const DI_AppStart:bitstring.
+const DI_SetCredentials:bitstring.
+const DI_SetHmac:bitstring.
+const DI_Done:bitstring.
+const TO0_Hello:bitstring.
+const TO0_HelloAck:bitstring.
+const TO0_OwnerSign:bitstring.
+const TO0_AcceptOwner:bitstring.
+const TO1_HelloRV:bitstring.
+const TO1_HelloRVAck:bitstring.
+const TO1_ProveToRV:bitstring.
+const TO1_RVRedirect:bitstring.
+const TO1_ErrorMessage:bitstring.
+const TO2_HelloDevice:bitstring.
+const TO2_ProveOVHdr:bitstring.
+const TO2_GetOVNextEntry:bitstring.
+const TO2_OVNextEntry:bitstring.
+const TO2_ProveDevice:bitstring.
+
+const null:bitstring.
+
+table DB(bitstring, bitstring, bitstring, bitstring).
+
+(* Asymmetric signature *)
+fun pk(skey):pkey.
+fun ok():result.
+fun sign(bitstring, skey):bitstring.
+reduc forall m:bitstring, sk:skey; checksign(sign(m, sk), m, pk(sk)) = ok().
+
+(* Certificates *)
+fun cert(pkey, skey):bitstring [private].
+reduc forall pubkey:pkey, sk:skey; checkcert(cert(pubkey, sk), pk(sk)) = ok().
+reduc forall pubkey:pkey, sk:skey; getpk(cert(pubkey, sk)) = pubkey.
+
+(* Symmetric encryption *)
+fun senc(bitstring, bitstring):bitstring.
+reduc forall m:bitstring, shk:bitstring; sdec(senc(m, shk), shk) = m.
+
+(* Hash function *)
+fun hash(bitstring):bitstring.
+fun hashKey(pkey):bitstring.
+
+(* Key derivation function *)
+fun KDF(G):bitstring.
+
+(* HMAC *)
+fun hmac(bitstring, bitstring):bitstring.
+
+(* Diffie-Helmann Exponential function *)
+fun exp(G, bitstring): G.
+equation forall x:bitstring, y:bitstring; exp(exp(g, x), y) = exp(exp(g, y), x).
+
+
+(* EVENTS *)
+event EndProtocol().
+event EndDI().
+event EndTO0UpdateEntry(bitstring, bitstring, bitstring, bitstring).
+event EndTO0FirstEntry(bitstring, bitstring, bitstring, bitstring).
+event EndTO1(bitstring).
+event EndTO2().
+event OwnershipTransferredOwner(bitstring, bitstring).
+event OwnerReceivedOV(bitstring).
+event AttackerReceivedOV(bitstring).
+
+event Here().
+
+
+(* QUERIES *)
+free testsecret:bitstring [private].
+free testsecret2:bitstring [private].
+free attGuid:bitstring.
+
+query attacker(testsecret).
+
+
+(*
+noninterf testsecret.
+weaksecret testsecret.
+query event(EndDI()).
+query event(Here()).
+query prevOV:bitstring, newOV:bitstring; event(OwnershipTransferredOwner(prevOV, newOV)).
+query OV:bitstring; event(OwnerReceivedOV(OV)).
+query guid:bitstring, to1d:bitstring, to1dSignature:bitstring, OV:bitstring; event(EndTO0(guid, to1d, to1dSignature, OV)).
+query ownerip:bitstring; event(EndTO1(ownerip)).
+query event(EndTO2()).
+query event(EndProtocol()).
+query attacker(testsecret2).
+*)
+
+
+
+
+
+let Device_TO2_2entries(devsk:skey, eASigInfo:bitstring, OVGuid:bitstring, ownerip:bitstring, to1d:bitstring, 
+				to1dSignature:bitstring, devsecret:bitstring, hashmanpk:bitstring) = 
+
+	(* --- TO2 - Transfer Ownership Protocol 2 --- *)
+	
+	(* Device sends the Hello message *)
+	new NonceTO2ProveOV:bitstring;	
+	let to2hello = (OVGuid, NonceTO2ProveOV, eASigInfo) in
+	
+	out(ch, (TO2_HelloDevice, ownerip, to2hello));
+	
+	(* Device receives ovheader *)
+	in(ch, (=TO2_ProveOVHdr, proveovhdr:bitstring));
+	
+	let (TO2ProveOVHdrPayload:bitstring, TO2ProveOVHdrPayloadSignature:bitstring, TO2ProveOVHdrUnprotectedHeaders:bitstring) = proveovhdr in
+	let (TO2OVHeader:bitstring, TO2OVHeaderHMAC:bitstring, =NonceTO2ProveOV, eBSigInfo':bitstring, xAKeyExchange:G, helloDeviceHash:bitstring) = TO2ProveOVHdrPayload in
+	let (TO2OVGuid:bitstring, TO2OVRVInfo:bitstring, TO2OVRVCertHash:bitstring, TO2OVDeviceInfo:bitstring, TO2OVPublicKey:pkey, TO2OVDevCertChainHash:bitstring) = TO2OVHeader in
+	let (NonceTO2ProveDEV:bitstring, CUPHOwnerPubKey:pkey) = TO2ProveOVHdrUnprotectedHeaders in
+	
+	(* Device verifies TO2ProveOVHdrPayloadSignature using CUPHOwnerPubKey *)
+	if checksign(TO2ProveOVHdrPayloadSignature, TO2ProveOVHdrPayload, CUPHOwnerPubKey) = ok() then
+	
+	(* Device verifies signature on to1d *)
+	if checksign(to1dSignature, to1d, CUPHOwnerPubKey) = ok() then
+	
+	(* Device verifies hash previous message *)
+	if helloDeviceHash = hash(to2hello) then
+	
+	(* Device verifies hmac on header *)
+	if hmac(TO2OVHeader, devsecret) = TO2OVHeaderHMAC then
+	
+	(* Device requests the OVEntry *)
+	out(ch, (TO2_GetOVNextEntry, ownerip));
+	
+	(* Device receives the OVEntries *)
+	in(ch, (=TO2_OVNextEntry, OVEntry1:bitstring, OVEntry2:bitstring));
+	
+	(* Internal verification of the OV *)
+	
+	let (OVEntryPayload1:bitstring, OVEntrySignature1:bitstring) = OVEntry1 in
+	let (OVEntryPayload2:bitstring, OVEntrySignature2:bitstring) = OVEntry2 in
+	
+	let (OVEHashPrevEntry1:bitstring, OVEHashHdrInfo1:bitstring, OVEPubKey1:pkey) = OVEntryPayload1 in
+	let (OVEHashPrevEntry2:bitstring, OVEHashHdrInfo2:bitstring, OVEPubKey2:pkey) = OVEntryPayload2 in
+	
+	(* Device verifies signatures on OVEntries *)
+	if checksign(OVEntrySignature1, OVEntryPayload1, TO2OVPublicKey) = ok() then
+	if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+
+	if OVEHashHdrInfo1 = hash((TO2OVGuid, TO2OVDeviceInfo)) then
+	if OVEHashHdrInfo2 = hash((TO2OVGuid, TO2OVDeviceInfo)) then
+
+	if hash((TO2OVHeader, TO2OVHeaderHMAC)) = OVEHashPrevEntry1 then
+	if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+	
+	
+	if OVEPubKey2 = CUPHOwnerPubKey then
+	if hashKey(TO2OVPublicKey) = hashmanpk then
+	
+	(* OWNER AUTHENTICATION SUCCEEDED *)
+	
+	new xBKey:bitstring;
+	let xBKeyExchange = exp(g, xBKey) in
+	let TO2ProveDevicePayload = (NonceTO2ProveDEV, xBKeyExchange) in
+	let TO2ProveDevicePayloadSignature = sign(TO2ProveDevicePayload, devsk) in
+
+	let sharedKeyExp = exp(xAKeyExchange, xBKey) in
+	let sharedKey = KDF(sharedKeyExp) in
+	
+	let testenc = senc(testsecret, sharedKey) in
+
+	let provedevice = (TO2_ProveDevice,  TO2ProveDevicePayload, TO2ProveDevicePayloadSignature, testenc) in
+	
+	out(ch, provedevice)
+.
+
+let Device_TO2_3entries(devsk:skey, eASigInfo:bitstring, OVGuid:bitstring, ownerip:bitstring, to1d:bitstring, 
+				to1dSignature:bitstring, devsecret:bitstring, hashmanpk:bitstring) = 
+
+	(* --- TO2 - Transfer Ownership Protocol 2 --- *)
+	
+	(* Device sends the Hello message *)
+	new NonceTO2ProveOV:bitstring;	
+	let to2hello = (OVGuid, NonceTO2ProveOV, eASigInfo) in
+	
+	out(ch, (TO2_HelloDevice, ownerip, to2hello));
+	
+	(* Device receives ovheader *)
+	in(ch, (=TO2_ProveOVHdr, proveovhdr:bitstring));
+	
+	let (TO2ProveOVHdrPayload:bitstring, TO2ProveOVHdrPayloadSignature:bitstring, TO2ProveOVHdrUnprotectedHeaders:bitstring) = proveovhdr in
+	let (TO2OVHeader:bitstring, TO2OVHeaderHMAC:bitstring, =NonceTO2ProveOV, eBSigInfo':bitstring, xAKeyExchange:G, helloDeviceHash:bitstring) = TO2ProveOVHdrPayload in
+	let (TO2OVGuid:bitstring, TO2OVRVInfo:bitstring, TO2OVRVCertHash:bitstring, TO2OVDeviceInfo:bitstring, TO2OVPublicKey:pkey, TO2OVDevCertChainHash:bitstring) = TO2OVHeader in
+	let (NonceTO2ProveDEV:bitstring, CUPHOwnerPubKey:pkey) = TO2ProveOVHdrUnprotectedHeaders in
+	
+	(* Device verifies TO2ProveOVHdrPayloadSignature using CUPHOwnerPubKey *)
+	if checksign(TO2ProveOVHdrPayloadSignature, TO2ProveOVHdrPayload, CUPHOwnerPubKey) = ok() then
+	
+	(* Device verifies signature on to1d *)
+	if checksign(to1dSignature, to1d, CUPHOwnerPubKey) = ok() then
+	
+	(* Device verifies hash previous message *)
+	if helloDeviceHash = hash(to2hello) then
+	
+	(* Device verifies hmac on header *)
+	if hmac(TO2OVHeader, devsecret) = TO2OVHeaderHMAC then
+	
+	(* Device requests the OVEntry *)
+	out(ch, (TO2_GetOVNextEntry, ownerip));
+	
+	(* Device receives the OVEntries *)
+	in(ch, (=TO2_OVNextEntry, OVEntry1:bitstring, OVEntry2:bitstring, OVEntry3:bitstring));
+	
+	(* Internal verification of the OV *)
+	
+	let (OVEntryPayload1:bitstring, OVEntrySignature1:bitstring) = OVEntry1 in
+	let (OVEntryPayload2:bitstring, OVEntrySignature2:bitstring) = OVEntry2 in
+	let (OVEntryPayload3:bitstring, OVEntrySignature3:bitstring) = OVEntry3 in
+	
+	let (OVEHashPrevEntry1:bitstring, OVEHashHdrInfo1:bitstring, OVEPubKey1:pkey) = OVEntryPayload1 in
+	let (OVEHashPrevEntry2:bitstring, OVEHashHdrInfo2:bitstring, OVEPubKey2:pkey) = OVEntryPayload2 in
+	let (OVEHashPrevEntry3:bitstring, OVEHashHdrInfo3:bitstring, OVEPubKey3:pkey) = OVEntryPayload3 in
+	
+	(* Device verifies signatures on OVEntries *)
+	if checksign(OVEntrySignature1, OVEntryPayload1, TO2OVPublicKey) = ok() then
+	if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+	if checksign(OVEntrySignature3, OVEntryPayload3, OVEPubKey2) = ok() then
+	
+	if OVEHashHdrInfo1 = hash((TO2OVGuid, TO2OVDeviceInfo)) then
+	if OVEHashHdrInfo2 = hash((TO2OVGuid, TO2OVDeviceInfo)) then
+	if OVEHashHdrInfo3 = hash((TO2OVGuid, TO2OVDeviceInfo)) then
+	
+	if hash((TO2OVHeader, TO2OVHeaderHMAC)) = OVEHashPrevEntry1 then
+	if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+	if hash(OVEntryPayload2) = OVEHashPrevEntry3 then
+	
+	if OVEPubKey3 = CUPHOwnerPubKey then
+	if hashKey(TO2OVPublicKey) = hashmanpk then
+	
+	(* OWNER AUTHENTICATION SUCCEEDED *)
+		
+	new xBKey:bitstring;
+	let xBKeyExchange = exp(g, xBKey) in
+	let TO2ProveDevicePayload = (NonceTO2ProveDEV, xBKeyExchange) in
+	let TO2ProveDevicePayloadSignature = sign(TO2ProveDevicePayload, devsk) in
+
+	let sharedKeyExp = exp(xAKeyExchange, xBKey) in
+	let sharedKey = KDF(sharedKeyExp) in
+	
+	let testenc = senc(testsecret, sharedKey) in
+
+	let provedevice = (TO2_ProveDevice,  TO2ProveDevicePayload, TO2ProveDevicePayloadSignature, testenc) in
+	
+	out(ch, provedevice)
+.
+
+let Device_DI_TO1(devsk:skey, capk:pkey) = 
+
+	(* --- DI: DEVICE INITIALIZE PROTOCOL --- *)
+	out(ch_dev_man, DI_AppStart);
+
+	in(ch_dev_man, response:bitstring);
+	let (=DI_SetCredentials, OVHeader:bitstring) = response in
+	
+	let (OVGuid:bitstring, OVRVInfo:bitstring, OVRVCertHash:bitstring, OVDeviceInfo:bitstring, OVPublicKey:pkey, OVDevCertChainHash:bitstring) = OVHeader in
+	let hashmanpk = hashKey(OVPublicKey) in
+
+	new devsecret:bitstring;
+	let HeaderHMAC = hmac(OVHeader, devsecret) in
+
+	out(ch_dev_man, (DI_SetHmac, HeaderHMAC));
+	
+	(* Before continuing, the device waits for the Owner *)
+	in(ch_sync, go:bitstring);
+	
+	(* --- TO1 - Transfer Ownership Protocol 1 --- *)
+	
+	(* Device seTO2_ProveOVHdrnds the Hello message *)
+	new eASigInfo:bitstring;
+	let hello = (TO1_HelloRV, OVRVInfo, (OVGuid, eASigInfo)) in
+	out(ch, hello);
+	
+	(* Device receives the Hello Ack from RV *)
+	in(ch, helloack:bitstring);
+	
+	let (=TO1_HelloRVAck, NonceTO1Proof:bitstring, eBSigInfo:bitstring) = helloack in
+	
+	(* Device signs the nonce *)
+	let NonceTO1ProofSignature = sign((NonceTO1Proof, OVGuid), devsk) in 
+	
+	out(ch, (TO1_ProveToRV, OVRVInfo, NonceTO1ProofSignature));
+	
+	(* Device receives the blob from the RV *)
+	in(ch, (serverReply:bitstring, serverReplySignature:bitstring, serverCert:bitstring));
+	
+	(* Verify the certificate of the server *)
+	if checkcert(serverCert, capk) = ok() then
+	if hash(serverCert) = OVRVCertHash then
+	let serverpk = getpk(serverCert) in
+	
+	
+	(* Verify server signature *)
+	if checksign(serverReplySignature, serverReply, serverpk) = ok() then
+	
+	let (=TO1_RVRedirect, to1d:bitstring, to1dSignature:bitstring) = serverReply in
+	let (ownerip:bitstring, to1dTo0dHash:bitstring) = to1d in
+	
+	(* DEVICE NOW HAS THE IP ADDRESS OF THE OWNER *)
+	event EndTO1(ownerip);
+	
+	(Device_TO2_3entries(devsk, eASigInfo, OVGuid, ownerip, to1d, to1dSignature, devsecret, hashmanpk)
+	|
+	Device_TO2_2entries(devsk, eASigInfo, OVGuid, ownerip, to1d, to1dSignature, devsecret, hashmanpk) )
+		
+.
+
+
+let Owner(ownersk:skey, ownerip:bitstring, capk:pkey, manpk:pkey) =
+
+	(* Owner receives the OV *)
+	in(ch, OV:bitstring);
+
+	let (OVHeader:bitstring, OVHeaderHMAC:bitstring, OVDevCertChain:bitstring, OVEntry1:bitstring, OVEntry2:bitstring, OVEntry3:bitstring) = OV in
+	let (OVGuid:bitstring, OVRVInfo:bitstring, OVRVCertHash:bitstring, OVDeviceInfo:bitstring, OVPublicKey:pkey, OVDevCertChainHash:bitstring) = OVHeader in
+	
+	(* Owner verifies OVDevCertChain *)
+	if checkcert(OVDevCertChain, capk) = ok() then
+	if OVDevCertChainHash = hash(OVDevCertChain) then 
+
+	(* Internal verification of the OV *)
+	let (OVEntryPayload1:bitstring, OVEntrySignature1:bitstring) = OVEntry1 in
+	let (OVEntryPayload2:bitstring, OVEntrySignature2:bitstring) = OVEntry2 in
+	let (OVEntryPayload3:bitstring, OVEntrySignature3:bitstring) = OVEntry3 in
+	
+	let (OVEHashPrevEntry1:bitstring, OVEHashHdrInfo1:bitstring, OVEPubKey1:pkey) = OVEntryPayload1 in
+	let (OVEHashPrevEntry2:bitstring, OVEHashHdrInfo2:bitstring, OVEPubKey2:pkey) = OVEntryPayload2 in
+	let (OVEHashPrevEntry3:bitstring, OVEHashHdrInfo3:bitstring, OVEPubKey3:pkey) = OVEntryPayload3 in
+
+	if OVEHashHdrInfo1 = hash((OVGuid, OVDeviceInfo)) then
+	if OVEHashHdrInfo2 = hash((OVGuid, OVDeviceInfo)) then
+	if OVEHashHdrInfo3 = hash((OVGuid, OVDeviceInfo)) then
+	
+	if checksign(OVEntrySignature1, OVEntryPayload1, OVPublicKey) = ok() then
+	if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+	if checksign(OVEntrySignature3, OVEntryPayload3, OVEPubKey2) = ok() then
+	
+	if hash((OVHeader, OVHeaderHMAC)) = OVEHashPrevEntry1 then
+	if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+	if hash(OVEntryPayload2) = OVEHashPrevEntry3 then
+	
+	(* Owner verifies OVPubKey1 is the same key in the OVHeader and equal to manpk *)
+	if OVEPubKey1 = OVPublicKey then
+	if OVEPubKey1 = manpk then
+	(* Owner verifies OVPubKey in the last Entry is its own public key *)
+	if OVEPubKey3 = pk(ownersk) then
+	
+	event OwnerReceivedOV(OV);
+	
+	(* --- TO0 - Transfer Ownership Protocol 0 --- *)
+	
+	(* Owner sends the Hello message *)
+	let hello = (TO0_Hello, OVRVInfo) in
+	out(ch, hello);
+	
+	in(ch, helloack:bitstring);
+	let (=TO0_HelloAck, NonceTO0Sign:bitstring) = helloack in
+	
+	let to0d = (OV, NonceTO0Sign) in
+	let to1dTo0dHash = hash(to0d) in
+	let to1d = (ownerip, to1dTo0dHash) in
+	
+	let to1dSignature = sign(to1d, ownersk) in
+	
+	(* Owner sends OwnerSign *)
+	out(ch, (TO0_OwnerSign, to0d, to1d, to1dSignature));
+	
+	in(ch, (acceptResponse:bitstring, acceptResponseSignature:bitstring, serverCert:bitstring));
+	
+	(* Verify the certificate of the server *)
+	if checkcert(serverCert, capk) = ok() then
+	if hash(serverCert) = OVRVCertHash then
+	let serverpk = getpk(serverCert) in
+	
+	
+	(* Verify server signature and response *)
+	if checksign(acceptResponseSignature, acceptResponse, serverpk) = ok() then
+	let (=TO0_AcceptOwner, =to1dTo0dHash) = acceptResponse in
+	
+	(* Server completed successfully TO0 protocol*)
+	
+	(* Owner turns on the device *)
+	new go:bitstring;
+	out(ch_sync, go);
+	
+	(* --- TO2 - Transfer Ownership Protocol 2 --- *)
+	
+	in(ch, to2start:bitstring);
+	
+	let (=TO2_HelloDevice, =ownerip, to2hello:bitstring) = to2start in
+	let (=OVGuid, NonceTO2ProveOV:bitstring, eASigInfo:bitstring) = to2hello in
+	
+	new eBSigInfo:bitstring;
+	new xAKey:bitstring;
+	let xAKeyExchange = exp(g, xAKey) in
+	let helloDeviceHash = hash(to2hello) in
+	let TO2ProveOVHdrPayload = (OVHeader, OVHeaderHMAC, NonceTO2ProveOV, eBSigInfo, xAKeyExchange, helloDeviceHash) in
+	let TO2ProveOVHdrPayloadSignature = sign(TO2ProveOVHdrPayload, ownersk) in
+	
+	new NonceTO2ProveDEV:bitstring;
+	let CUPHOwnerPubKey = pk(ownersk) in
+	let TO2ProveOVHdrUnprotectedHeaders = (NonceTO2ProveDEV, CUPHOwnerPubKey) in
+	
+	let proveovhdr = (TO2ProveOVHdrPayload, TO2ProveOVHdrPayloadSignature, TO2ProveOVHdrUnprotectedHeaders) in
+	
+	out(ch, (TO2_ProveOVHdr, proveovhdr));
+	
+	in(ch, (=TO2_GetOVNextEntry, =ownerip));
+	
+	(* Owner sends the OVEntries *)
+	out(ch, (TO2_OVNextEntry, OVEntry1, OVEntry2, OVEntry3));
+	
+	in(ch, (=TO2_ProveDevice, TO2ProveDevicePayload:bitstring, TO2ProveDevicePayloadSignature:bitstring, testenc:bitstring));
+	
+	let (=NonceTO2ProveDEV, xBKeyExchange:G) = TO2ProveDevicePayload in
+	
+	(* Owner verifies the OV cert chain ... already done above *)
+	(* Owner verifies the signature on NonceTO2ProveDEV *)
+	let devpk = getpk(OVDevCertChain) in
+	if checksign(TO2ProveDevicePayloadSignature, TO2ProveDevicePayload, devpk) = ok() then
+	
+	(* DEVICE AUTHENTICATION SUCCEEDED *)
+	event EndTO2();
+	
+	let sharedKeyExp = exp(xBKeyExchange, xAKey) in
+	let sharedKey = KDF(sharedKeyExp) in
+	
+	if sdec(testenc, sharedKey) = testsecret then
+	
+	out(ch, senc(testsecret2, sharedKey));
+	
+	(* PROTOCOL COMPLETED *)
+	event EndProtocol()
+.	
+
+let ManufacturingStation(mansk:skey, devCertChain:bitstring, serverip:bitstring, respk:pkey, serverCert:bitstring) =
+	
+	(* --- DI: DEVICE INITIALIZE PROTOCOL --- *)
+	in(ch_dev_man, command:bitstring);
+	if command = DI_AppStart then
+
+	(* Create the OVHeader *)
+	new OVGuid:bitstring;
+	let OVRVInfo = serverip in
+	new OVDeviceInfo:bitstring;
+	let OVPublicKey = pk(mansk) in
+	let OVDevCertChainHash = hash(devCertChain) in
+	let OVRVCertHash = hash(serverCert) in
+
+	let OVHeader = (OVGuid, OVRVInfo, OVRVCertHash, OVDeviceInfo, OVPublicKey, OVDevCertChainHash) in
+	out(ch_dev_man, (DI_SetCredentials, OVHeader));
+	
+	in(ch_dev_man, response:bitstring);
+	let (=DI_SetHmac, HeaderHMAC:bitstring) = response in
+	
+	out(ch_dev_man, DI_Done);
+	
+	event EndDI();
+	
+	(* Create the OV and send it to Device Reseller *)
+	
+	let OVHeaderHMAC = HeaderHMAC in
+	let OVDevCertChain = devCertChain in
+	
+	let OVEHashPrevEntry = hash((OVHeader, OVHeaderHMAC)) in
+	let OVEHashHdrInfo = hash((OVGuid, OVDeviceInfo)) in
+	let OVEPubKey = OVPublicKey in
+
+	let OVEntryPayload = (OVEHashPrevEntry, OVEHashHdrInfo, OVEPubKey) in
+	let OVEntry = (OVEntryPayload, sign(OVEntryPayload, mansk)) in
+	
+	(* Extend the Ownership Voucher for the Reseller *)
+	let OVEHashPrevEntry' = hash(OVEntryPayload) in
+	let OVEHashHdrInfo' = hash((OVGuid, OVDeviceInfo)) in
+	let OVEPubKey' = respk in
+	let OVEntryPayload' = (OVEHashPrevEntry', OVEHashHdrInfo', OVEPubKey') in
+	let OVEntry' = (OVEntryPayload', sign(OVEntryPayload', mansk)) in
+	
+	let OV = (OVHeader, OVHeaderHMAC, OVDevCertChain, OVEntry, OVEntry') in
+	
+	out(ch, OV)	
+. 
+
+
+
+let RendevouzServerRegisterOwner(serverip:bitstring, serversk:skey, serverCert:bitstring, manpk:pkey, capk:pkey, realownerpk:pkey)  =
+	
+	(* --- TO0 - Transfer Ownership Protocol 0 --- *)
+	
+	(* Server receives the Hello TO1_HelloRVAckrequest *)
+	in(ch, to0request:bitstring);
+	let (=TO0_Hello, =serverip) = to0request in
+	
+	(* Server creates and sends nonce to sign *)
+	new NonceTO0Sign:bitstring;
+	out(ch, (TO0_HelloAck, NonceTO0Sign));
+
+	(* Server receives the respondse from the Owner *)
+	in(ch, ownersign:bitstring);
+	
+	let (=TO0_OwnerSign, to0d:bitstring, to1d:bitstring, to1dSignature:bitstring) = ownersign in 
+	
+	let (OV:bitstring, =NonceTO0Sign) = to0d in
+	let (ownerip:bitstring, to1dTo0dHash:bitstring) = to1d in
+	
+	if to1dTo0dHash = hash(to0d) then
+	
+	(* OV Verification *)
+	
+	let (OVHeader:bitstring, OVHeaderHMAC:bitstring, OVDevCertChain:bitstring, OVEntry1:bitstring, OVEntry2:bitstring, OVEntry3:bitstring) = OV in
+	let (OVGuid:bitstring, OVRVInfo:bitstring, OVRVCertHash:bitstring, OVDeviceInfo:bitstring, OVPublicKey:pkey, OVDevCertChainHash:bitstring) = OVHeader in
+	
+	(* Server verifies OVDevCertChain *)
+	if checkcert(OVDevCertChain, capk) = ok() then
+	if OVDevCertChainHash = hash(OVDevCertChain) then 
+	
+	(* Internal verification of the OV *)
+	let (OVEntryPayload1:bitstring, OVEntrySignature1:bitstring) = OVEntry1 in
+	let (OVEntryPayload2:bitstring, OVEntrySignature2:bitstring) = OVEntry2 in
+	let (OVEntryPayload3:bitstring, OVEntrySignature3:bitstring) = OVEntry3 in
+	
+	let (OVEHashPrevEntry1:bitstring, OVEHashHdrInfo1:bitstring, OVEPubKey1:pkey) = OVEntryPayload1 in
+	let (OVEHashPrevEntry2:bitstring, OVEHashHdrInfo2:bitstring, OVEPubKey2:pkey) = OVEntryPayload2 in
+	let (OVEHashPrevEntry3:bitstring, OVEHashHdrInfo3:bitstring, OVEPubKey3:pkey) = OVEntryPayload3 in
+	
+	
+	(* Check if an entry already exists for that GUID *)
+	get DB(=OVGuid, to1dStored:bitstring, to1dSignatureStored:bitstring, OVStored:bitstring) in (
+		(* The entry already exists: check the public owner key *)
+		let (OVHeaderStored:bitstring, OVHeaderHMACStored:bitstring, OVDevCertChainStored:bitstring, OVEntry1Stored:bitstring, 
+			OVEntry2Stored:bitstring, OVEntry3Stored:bitstring) = OVStored in
+		let (OVEntryPayload3Stored:bitstring, OVEntrySignature3Stored:bitstring) = OVEntry3Stored in
+		let (OVEHashPrevEntry3Stored:bitstring, OVEHashHdrInfo3Stored:bitstring, OVEPubKey3Stored:pkey) = OVEntryPayload3Stored in
+		if OVEPubKey3Stored = OVEPubKey3 then
+		
+		(* Update the entry *)
+		if OVEHashHdrInfo1 = hash((OVGuid, OVDeviceInfo)) then
+		if OVEHashHdrInfo2 = hash((OVGuid, OVDeviceInfo)) then
+		if OVEHashHdrInfo3 = hash((OVGuid, OVDeviceInfo)) then
+	
+		if checksign(OVEntrySignature1, OVEntryPayload1, OVPublicKey) = ok() then
+		if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+		if checksign(OVEntrySignature3, OVEntryPayload3, OVEPubKey2) = ok() then
+	
+		if hash((OVHeader, OVHeaderHMAC)) = OVEHashPrevEntry1 then
+		if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+		if hash(OVEntryPayload2) = OVEHashPrevEntry3 then
+	
+		(* Server trusts the pubkey in the OVHeader *)
+		if OVPublicKey = manpk then
+		if OVEPubKey1 = OVPublicKey then
+	
+		(* Server verifies the signature on the nonce *)
+		if checksign(to1dSignature, to1d, OVEPubKey3) = ok() then
+	
+		(* OWNER AUTHENTICATION SUCCEEDED *)
+	
+		(* Save the correspondance in the table *)
+		insert DB(OVGuid, to1d, to1dSignature, OV);
+	
+		let acceptResponse = (TO0_AcceptOwner, to1dTo0dHash) in
+		let acceptResponseSignature = sign(acceptResponse, serversk) in
+	
+		out(ch, (acceptResponse, acceptResponseSignature, serverCert));
+	
+		event EndTO0UpdateEntry(OVGuid, to1d, to1dSignature, OV); 0
+	
+	) else (
+		(* The entry does not exist: the server add the entry *)
+		if OVEPubKey3 = realownerpk then
+		
+		if OVEHashHdrInfo1 = hash((OVGuid, OVDeviceInfo)) then
+		if OVEHashHdrInfo2 = hash((OVGuid, OVDeviceInfo)) then
+		if OVEHashHdrInfo3 = hash((OVGuid, OVDeviceInfo)) then
+	
+		if checksign(OVEntrySignature1, OVEntryPayload1, OVPublicKey) = ok() then
+		if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+		if checksign(OVEntrySignature3, OVEntryPayload3, OVEPubKey2) = ok() then
+	
+		if hash((OVHeader, OVHeaderHMAC)) = OVEHashPrevEntry1 then
+		if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+		if hash(OVEntryPayload2) = OVEHashPrevEntry3 then
+	
+		(* Server trusts the pubkey in the OVHeader *)
+		if OVPublicKey = manpk then
+		if OVEPubKey1 = OVPublicKey then
+	
+		(* Server verifies the signature on the nonce *)
+		if checksign(to1dSignature, to1d, OVEPubKey3) = ok() then
+	
+		(* OWNER AUTHENTICATION SUCCEEDED *)
+	
+		(* Save the correspondance in the table *)
+		insert DB(OVGuid, to1d, to1dSignature, OV);
+	
+		let acceptResponse = (TO0_AcceptOwner, to1dTo0dHash) in
+		let acceptResponseSignature = sign(acceptResponse, serversk) in
+	
+		out(ch, (acceptResponse, acceptResponseSignature, serverCert));
+	
+		event EndTO0FirstEntry(OVGuid, to1d, to1dSignature, OV); 0
+	)		
+.
+
+
+let RendevouzServerReplyToDevice(serverip:bitstring, serversk:skey, serverCert:bitstring, manpk:pkey, capk:pkey) = 
+
+	(* --- TO1 - Transfer Ownership Protocol 1 --- *)
+
+	(* Server receives the Hello TO1_HelloRVAckrequest *)
+	in(ch, to1request:bitstring);
+	let (=TO1_HelloRV, =serverip, payload:bitstring) = to1request in
+	
+	let (OVGuid:bitstring, eASigInfo:bitstring) = payload in
+	
+	(* Retrieve the entry saved in the DB *)
+	get DB(=OVGuid, to1d:bitstring, to1dSignature:bitstring, OV:bitstring) in 
+	
+	new NonceTO1Proof:bitstring;
+	new eBSigInfo:bitstring;
+	
+	out(ch, (TO1_HelloRVAck, NonceTO1Proof, eBSigInfo));
+	
+	(* Receive the signature *)
+	in(ch, signresp:bitstring);
+	
+	let (=TO1_ProveToRV, =serverip, NonceTO1ProofSignature:bitstring) = signresp in
+	
+	let (OVHeader:bitstring, OVHeaderHMAC:bitstring, OVDevCertChain:bitstring, OVEntry1:bitstring, OVEntry2:bitstring, OVEntry3:bitstring) = OV in
+	let devpk = getpk(OVDevCertChain) in
+	
+	(* Verify the signature *)
+	if checksign(NonceTO1ProofSignature, (NonceTO1Proof, OVGuid), devpk) = ok() then
+	
+	(* DEVICE AUTHENTICATION SUCCEEDED *)
+	
+	(* Return to1d object + signature to the device *)
+	
+	let serverReply = (TO1_RVRedirect, to1d, to1dSignature) in
+	let serverReplySignature = sign(serverReply, serversk) in 
+	
+	out(ch, (serverReply, serverReplySignature, serverCert))
+	
+	(*
+	La graffa andrebbe aperta dopo il get dal DB
+	} else {
+	    out(ch, TO1_ErrorMessage); 	
+	} 
+	*) 
+.
+
+
+let SellDeviceToOwner(ownerpk:pkey, ressk:skey) = 
+
+	(* Reseller sells the device to the Owner *)
+
+	in(ch, OV:bitstring);
+	
+	let (OVHeader:bitstring, OVHeaderHMAC:bitstring, OVDevCertChain:bitstring, OVEntry1:bitstring, OVEntry2:bitstring) = OV in
+	let (OVGuid:bitstring, OVRVInfo:bitstring, OVRVCertHash:bitstring, OVDeviceInfo:bitstring, OVPublicKey:pkey, OVDevCertChainHash:bitstring) = OVHeader in
+	
+	(* OV INTERNAL VERIFICATION *)
+	let (OVEntryPayload1:bitstring, OVEntrySignature1:bitstring) = OVEntry1 in
+	let (OVEntryPayload2:bitstring, OVEntrySignature2:bitstring) = OVEntry2 in
+	
+	let (OVEHashPrevEntry1:bitstring, OVEHashHdrInfo1:bitstring, OVEPubKey1:pkey) = OVEntryPayload1 in
+	let (OVEHashPrevEntry2:bitstring, OVEHashHdrInfo2:bitstring, OVEPubKey2:pkey) = OVEntryPayload2 in
+
+	if OVEHashHdrInfo1 = hash((OVGuid, OVDeviceInfo)) then
+	if OVEHashHdrInfo2 = hash((OVGuid, OVDeviceInfo)) then
+	
+	if checksign(OVEntrySignature1, OVEntryPayload1, OVPublicKey) = ok() then
+	if checksign(OVEntrySignature2, OVEntryPayload2, OVEPubKey1) = ok() then
+	
+	if hash((OVHeader, OVHeaderHMAC)) = OVEHashPrevEntry1 then
+	if hash(OVEntryPayload1) = OVEHashPrevEntry2 then
+	
+	(* Add OVEntry *)
+	let OVEHashPrevEntry' = hash(OVEntryPayload2) in
+	let OVEHashHdrInfo' = hash((OVGuid, OVDeviceInfo)) in
+	let OVEPubKey' = ownerpk in
+	
+	let OVEntryPayload' = (OVEHashPrevEntry', OVEHashHdrInfo', OVEPubKey') in
+	let OVEntry' = (OVEntryPayload', sign(OVEntryPayload', ressk)) in
+
+	let OV' = (OVHeader, OVHeaderHMAC, OVDevCertChain, OVEntry1, OVEntry2, OVEntry') in
+
+	out(ch, OV');
+	
+	event OwnershipTransferredOwner(OV, OV')
+.
+
+
+	
+
+process
+	(* Create CA (trusted entity) *)
+	new cask:skey;
+	let capk = pk(cask) in
+	out(ch, capk);
+	
+	(* Create device *)
+	new devsk:skey;
+	let devpk = pk(devsk) in
+	(* Certify device public key *)
+	let devCertChain = cert(devpk, cask) in 
+
+	(* Create the Rendevouz Server *)
+	new serverip:bitstring;
+	new serversk:skey;
+	let serverpk = pk(serversk) in
+	(* Certify server public key *)
+	let serverCert = cert(serverpk, cask) in
+
+	(* Create Manufacturer *)
+	new mansk:skey;
+	let manpk = pk(mansk) in
+	out(ch, manpk);
+
+	(* Create owner *)
+	new ownersk:skey;
+	let ownerpk = pk(ownersk) in
+	new ownerip:bitstring;
+	
+	(* Create attacker *)
+	new attsk:skey;
+	let attpk = pk(attsk) in
+	let attCertChain = cert(attpk, cask) in 
+	out(ch, (attsk, attCertChain));
+
+	Device_DI_TO1(devsk, capk) | ManufacturingStation(mansk, devCertChain, serverip, attpk, serverCert) | SellDeviceToOwner(ownerpk, attsk) 
+	| Owner(ownersk, ownerip, capk, manpk) | !RendevouzServerRegisterOwner(serverip, serversk, serverCert, manpk, capk, ownerpk) 
+	| !RendevouzServerReplyToDevice(serverip, serversk, serverCert, manpk, capk)
+	
+	
+	
+
+	
+
