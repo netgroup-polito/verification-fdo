@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.fidoalliance.fdo.protocol.ApiTest" time="8.568" tests="13" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="log4j.configurationFile" value="log4j2.xml"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/simone/Scrivania/fdo-hack-code/protocol/target/test-classes:/home/simone/Scrivania/fdo-hack-code/protocol/target/classes:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/home/simone/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/simone/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/home/simone/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/home/simone/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:/home/simone/.m2/repository/com/augustcellars/cose/cose-java/1.1.0/cose-java-1.1.0.jar:/home/simone/.m2/repository/com/upokecenter/cbor/4.0.1/cbor-4.0.1.jar:/home/simone/.m2/repository/com/github/peteroupc/numbers/1.4.3/numbers-1.4.3.jar:/home/simone/.m2/repository/net/i2p/crypto/eddsa/0.3.0/eddsa-0.3.0.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.17.2/log4j-slf4j-impl-2.17.2.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar:/home/simone/.m2/repository/org/slf4j/log4j-over-slf4j/1.7.36/log4j-over-slf4j-1.7.36.jar:/home/simone/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar:/home/simone/.m2/repository/commons-codec/commons-codec/1.15/commons-codec-1.15.jar:/home/simone/.m2/repository/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar:/home/simone/.m2/repository/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.15.2/jackson-dataformat-cbor-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.15.2/jackson-dataformat-yaml-2.15.2.jar:/home/simone/.m2/repository/org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar:/home/simone/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/simone/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/home/simone/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/home/simone/.m2/repository/org/bouncycastle/bcprov-jdk18on/1.76/bcprov-jdk18on-1.76.jar:/home/simone/.m2/repository/org/bouncycastle/bcpkix-jdk18on/1.76/bcpkix-jdk18on-1.76.jar:/home/simone/.m2/repository/org/bouncycastle/bcutil-jdk18on/1.76/bcutil-jdk18on-1.76.jar:/home/simone/.m2/repository/org/hibernate/orm/hibernate-core/6.1.0.Final/hibernate-core-6.1.0.Final.jar:/home/simone/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.0.0/jakarta.persistence-api-3.0.0.jar:/home/simone/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.0/jakarta.transaction-api-2.0.0.jar:/home/simone/.m2/repository/org/jboss/logging/jboss-logging/3.4.3.Final/jboss-logging-3.4.3.Final.jar:/home/simone/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.2.Final/hibernate-commons-annotations-6.0.2.Final.jar:/home/simone/.m2/repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/home/simone/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar:/home/simone/.m2/repository/net/bytebuddy/byte-buddy/1.12.9/byte-buddy-1.12.9.jar:/home/simone/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar:/home/simone/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar:/home/simone/.m2/repository/org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.jar:/home/simone/.m2/repository/org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.jar:/home/simone/.m2/repository/org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar:/home/simone/.m2/repository/com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar:/home/simone/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.0/jakarta.inject-api-2.0.0.jar:/home/simone/.m2/repository/org/antlr/antlr4-runtime/4.10/antlr4-runtime-4.10.jar:/home/simone/.m2/repository/org/mariadb/jdbc/mariadb-java-client/3.0.5/mariadb-java-client-3.0.5.jar:/home/simone/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/home/simone/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.15/tomcat-embed-core-10.1.15.jar:/home/simone/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.15/tomcat-annotations-api-10.1.15.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="fdo.config.home" value="/home/simone/Scrivania/fdo-hack-code/protocol/src/test/resources"/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Rome"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IT"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk-17-oracle-x64/lib"/>
+    <property name="sun.java.command" value="/home/simone/Scrivania/fdo-hack-code/protocol/target/surefire/surefirebooter-20240212115750506_3.jar /home/simone/Scrivania/fdo-hack-code/protocol/target/surefire 2024-02-12T11-57-50_351-jvmRun1 surefire-20240212115750506_1tmp surefire_0-20240212115750506_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/simone/Scrivania/fdo-hack-code/protocol/target/test-classes:/home/simone/Scrivania/fdo-hack-code/protocol/target/classes:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/home/simone/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/simone/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/home/simone/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/home/simone/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/home/simone/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:/home/simone/.m2/repository/com/augustcellars/cose/cose-java/1.1.0/cose-java-1.1.0.jar:/home/simone/.m2/repository/com/upokecenter/cbor/4.0.1/cbor-4.0.1.jar:/home/simone/.m2/repository/com/github/peteroupc/numbers/1.4.3/numbers-1.4.3.jar:/home/simone/.m2/repository/net/i2p/crypto/eddsa/0.3.0/eddsa-0.3.0.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.17.2/log4j-slf4j-impl-2.17.2.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar:/home/simone/.m2/repository/org/slf4j/log4j-over-slf4j/1.7.36/log4j-over-slf4j-1.7.36.jar:/home/simone/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/home/simone/.m2/repository/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar:/home/simone/.m2/repository/commons-codec/commons-codec/1.15/commons-codec-1.15.jar:/home/simone/.m2/repository/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar:/home/simone/.m2/repository/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.15.2/jackson-dataformat-cbor-2.15.2.jar:/home/simone/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.15.2/jackson-dataformat-yaml-2.15.2.jar:/home/simone/.m2/repository/org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar:/home/simone/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/simone/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/home/simone/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/home/simone/.m2/repository/org/bouncycastle/bcprov-jdk18on/1.76/bcprov-jdk18on-1.76.jar:/home/simone/.m2/repository/org/bouncycastle/bcpkix-jdk18on/1.76/bcpkix-jdk18on-1.76.jar:/home/simone/.m2/repository/org/bouncycastle/bcutil-jdk18on/1.76/bcutil-jdk18on-1.76.jar:/home/simone/.m2/repository/org/hibernate/orm/hibernate-core/6.1.0.Final/hibernate-core-6.1.0.Final.jar:/home/simone/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.0.0/jakarta.persistence-api-3.0.0.jar:/home/simone/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.0/jakarta.transaction-api-2.0.0.jar:/home/simone/.m2/repository/org/jboss/logging/jboss-logging/3.4.3.Final/jboss-logging-3.4.3.Final.jar:/home/simone/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.2.Final/hibernate-commons-annotations-6.0.2.Final.jar:/home/simone/.m2/repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/home/simone/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar:/home/simone/.m2/repository/net/bytebuddy/byte-buddy/1.12.9/byte-buddy-1.12.9.jar:/home/simone/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar:/home/simone/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar:/home/simone/.m2/repository/org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.jar:/home/simone/.m2/repository/org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.jar:/home/simone/.m2/repository/org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar:/home/simone/.m2/repository/com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar:/home/simone/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.0/jakarta.inject-api-2.0.0.jar:/home/simone/.m2/repository/org/antlr/antlr4-runtime/4.10/antlr4-runtime-4.10.jar:/home/simone/.m2/repository/org/mariadb/jdbc/mariadb-java-client/3.0.5/mariadb-java-client-3.0.5.jar:/home/simone/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/home/simone/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.15/tomcat-embed-core-10.1.15.jar:/home/simone/.m2/repository/org/apache/tomcat/tomcat-annotations-api/10.1.15/tomcat-annotations-api-10.1.15.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="application.version" value="9.9.9-TEST"/>
+    <property name="user.home" value="/home/simone"/>
+    <property name="user.language" value="it"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-10-17"/>
+    <property name="java.home" value="/usr/lib/jvm/jdk-17-oracle-x64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/simone/Scrivania/fdo-hack-code/protocol"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/home/simone/Scrivania/fdo-hack-code/protocol/target/surefire/surefirebooter-20240212115750506_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.9+11-LTS-201"/>
+    <property name="user.name" value="simone"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.5.0-17-generic"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/simone/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="service.name" value="All-in-one demo"/>
+    <property name="catalina.home" value="/home/simone/Scrivania/fdo-hack-code/protocol/src/test/resources"/>
+    <property name="java.version" value="17.0.9"/>
+    <property name="user.dir" value="/home/simone/Scrivania/fdo-hack-code/protocol"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="app-data.dir" value="./app-data"/>
+    <property name="catalina.base" value="/home/simone/Scrivania/fdo-hack-code/protocol/src/test/resources"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.9+11-LTS-201"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="aioRvInfoTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.32">
+    <system-out><![CDATA[11:57:51.933 [WARN ] Using SSL self-signed certificate trust strategy for Http Clients
+11:57:52.024 [WARN ] Owner using http protocol for TO0. Should use HTTPS in production. 
+11:57:52.031 [INFO ] To0Scheduler will run every 120 seconds
+11:57:52.034 [INFO ] Session cleaner will run every 3600 seconds
+11:57:52.041 [INFO ] Voucher auto-injection enabled.
+11:57:52.155 [INFO ] HHH000412: Hibernate ORM core version 6.1.0.Final
+11:57:52.757 [WARN ] HHH10001002: Using built-in connection pool (not intended for production use)
+11:57:52.768 [INFO ] HHH10001005: Loaded JDBC driver class: org.h2.Driver
+11:57:52.768 [INFO ] HHH10001012: Connecting with JDBC URL [jdbc:h2:tcp://localhost:9092/./app-data/emdb]
+11:57:52.768 [INFO ] HHH10001001: Connection properties: {password=****, user=sa}
+11:57:52.768 [INFO ] HHH10001003: Autocommit mode: false
+11:57:52.770 [INFO ] HHH10001115: Connection pool size: 20 (min=1)
+11:57:52.830 [INFO ] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists allow_deny_list cascade 
+11:57:53.415 [INFO ] HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@11bfd751] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists certificate_data cascade 
+Hibernate: drop table if exists certificate_validity cascade 
+Hibernate: drop table if exists conformance_data cascade 
+Hibernate: drop table if exists manufactured_voucher cascade 
+Hibernate: drop table if exists onboarding_config cascade 
+Hibernate: drop table if exists onboarding_voucher cascade 
+Hibernate: drop table if exists ondie_certificate_data cascade 
+Hibernate: drop table if exists protocol_session cascade 
+Hibernate: drop table if exists rv_data cascade 
+Hibernate: drop table if exists rv_redirect cascade 
+Hibernate: drop table if exists system_package cascade 
+Hibernate: drop table if exists system_resource cascade 
+Hibernate: create table allow_deny_list (hash varchar(255) not null, allowed boolean, primary key (hash))
+11:57:53.424 [INFO ] HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3c3ab672] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table certificate_data (name varchar(255) not null, data blob, primary key (name))
+Hibernate: create table certificate_validity (id bigint not null, days integer, primary key (id))
+Hibernate: create table conformance_data (guid varchar(255) not null, data varchar(255) not null, primary key (guid))
+Hibernate: create table manufactured_voucher (serial_no varchar(255) not null, created_on timestamp(6), data blob not null, primary key (serial_no))
+Hibernate: create table onboarding_config (id bigint not null, max_message_size integer, max_serviceinfo_size integer, replacement_rvInfo clob, rv_blob clob not null, wait_seconds bigint not null, primary key (id))
+Hibernate: create table onboarding_voucher (guid varchar(255) not null, created_on timestamp(6) not null, data blob not null, replacement blob, to0_expiry timestamp(6), to2_completed_on timestamp(6), primary key (guid))
+Hibernate: create table ondie_certificate_data (id varchar(255) not null, data blob, primary key (id))
+Hibernate: create table protocol_session (name varchar(255) not null, created_on timestamp(6), data blob, primary key (name))
+Hibernate: create table rv_data (id bigint not null, data clob, primary key (id))
+Hibernate: create table rv_redirect (guid varchar(255) not null, created_on timestamp(6) not null, data blob not null, expiry timestamp(6) not null, primary key (guid))
+Hibernate: create table system_package (id bigint not null, data clob not null, primary key (id))
+Hibernate: create table system_resource (name varchar(255) not null, data blob not null, primary key (name))
+11:57:55.327 [INFO ] Started All-in-one demo Service.
+11:57:55.525 [INFO ] Rendezvous Info [[[5, "127.0.0.1"], [3,8443], [12, 2], [2, "127.0.0.1"], [4, 8443]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+11:57:55.568 [INFO ] Inserting data into RV_DATA
+Hibernate: insert into rv_data (data, id) values (?, ?)
+11:57:55.614 [INFO ] Rendezvous Info [[[5, "localhost"], [3,8443], [12, 2], [2, "127.0.0.1"], [4, 8443]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: update rv_data set data=? where id=?
+11:57:55.632 [INFO ] Rendezvous Info [[[5, "127.0.0.1"], [3,8080], [12, 1], [2, "127.0.0.1"], [4, 8080]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: update rv_data set data=? where id=?
+11:57:55.640 [INFO ] Rendezvous Info [[[5, "127.0.0.1"], [3,8080], [12, 1], [2, "127.0.0.1"], [4, 8080]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: update rv_data set data=? where id=?
+]]></system-out>
+    <system-err><![CDATA[feb 12, 2024 11:57:53 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+feb 12, 2024 11:57:53 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+feb 12, 2024 11:57:53 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/10.1.15]
+feb 12, 2024 11:57:54 AM org.apache.catalina.startup.ContextConfig getDefaultWebXmlFragment
+INFO: No global web.xml found
+feb 12, 2024 11:57:55 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8080"]
+]]></system-err>
+  </testcase>
+  <testcase name="allowListTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.089">
+    <system-out><![CDATA[Hibernate: select a1_0.hash,a1_0.allowed from allow_deny_list a1_0 where a1_0.hash=?
+Hibernate: insert into allow_deny_list (allowed, hash) values (?, ?)
+Hibernate: select a1_0.hash,a1_0.allowed from allow_deny_list a1_0 where a1_0.hash=?
+11:57:55.724 [WARN ] Deleted from AllowList Table
+Hibernate: delete from allow_deny_list where hash=?
+Hibernate: select a1_0.hash,a1_0.allowed from allow_deny_list a1_0 where a1_0.hash=?
+11:57:55.732 [WARN ] Certificate not found.
+Hibernate: select a1_0.hash,a1_0.allowed from allow_deny_list a1_0 where a1_0.hash=?
+Hibernate: insert into allow_deny_list (allowed, hash) values (?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="certificateTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="1.547">
+    <system-out><![CDATA[Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: insert into certificate_data (data, name) values (?, ?)
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: insert into certificate_validity (days, id) values (?, ?)
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: update certificate_data set data=? where name=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: insert into certificate_data (data, name) values (?, ?)
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: insert into certificate_data (data, name) values (?, ?)
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: delete from certificate_data where name=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+11:57:57.286 [WARN ] Keystore file not found.
+]]></system-out>
+  </testcase>
+  <testcase name="certificateValidityTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.014">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+11:57:57.293 [ERROR] Invalid days parameter provided
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="deviceInfoTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.124">
+    <system-out><![CDATA[11:57:57.342 [WARN ] Received invalid or empty poll time value. Defaulting to 20 seconds
+Hibernate: select m1_0.serial_no,m1_0.created_on,m1_0.data from manufactured_voucher m1_0
+Hibernate: select m1_0.serial_no,m1_0.created_on,m1_0.data from manufactured_voucher m1_0
+11:57:57.419 [WARN ] Received poll time below 1 second. Defaulting to 20 seconds
+Hibernate: select m1_0.serial_no,m1_0.created_on,m1_0.data from manufactured_voucher m1_0
+Hibernate: select m1_0.serial_no,m1_0.created_on,m1_0.data from manufactured_voucher m1_0
+]]></system-out>
+  </testcase>
+  <testcase name="healthTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.006">
+    <system-out><![CDATA[11:57:57.432 [INFO ] Health check invoked at Mon Feb 12 11:57:57 CET 2024
+]]></system-out>
+  </testcase>
+  <testcase name="logTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.003"/>
+  <testcase name="redirectEntryTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.034">
+    <system-out><![CDATA[11:57:57.444 [INFO ] TO2 body: [["127.0.0.1","127.0.0.1",8042,3]]
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: insert into onboarding_config (max_message_size, max_serviceinfo_size, replacement_rvInfo, rv_blob, wait_seconds, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+11:57:57.463 [INFO ] TO2 body: [["127.0.0.1","127.0.0.1",8042,3]]
+11:57:57.469 [INFO ] TO2 body: [["localhost","127.0.0.1",8080,3]]
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: update onboarding_config set max_message_size=?, max_serviceinfo_size=?, replacement_rvInfo=?, rv_blob=?, wait_seconds=? where id=?
+]]></system-out>
+  </testcase>
+  <testcase name="rvInfoTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.022">
+    <system-out><![CDATA[11:57:57.477 [INFO ] RVInfo doPost body : [[[2,"127.0.0.1"],[5,"127.0.0.1"],[3,8040],[4,8040]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: update rv_data set data=? where id=?
+11:57:57.486 [INFO ] RVInfo doPost body : [[[2,"127.0.0.1"],[5,"127.0.0.1"],[3,8080],[4,8080]]]
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: update rv_data set data=? where id=?
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+11:57:57.494 [INFO ] RVInfo doGet body : [[[2,"127.0.0.1"],[5,"127.0.0.1"],[3,8080],[4,8080]]]
+]]></system-out>
+  </testcase>
+  <testcase name="sviSizeTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.03">
+    <system-out><![CDATA[11:57:57.500 [ERROR] Invalid SVI Threshold size
+11:57:57.504 [WARN ] Value below the threshold of 1300 bytes. Defaulting to 1300 bytes.
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: update onboarding_config set max_message_size=?, max_serviceinfo_size=?, replacement_rvInfo=?, rv_blob=?, wait_seconds=? where id=?
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: update onboarding_config set max_message_size=?, max_serviceinfo_size=?, replacement_rvInfo=?, rv_blob=?, wait_seconds=? where id=?
+11:57:57.517 [WARN ] Value above the threshold of 65536 bytes. Defaulting to 65536 bytes.
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: update onboarding_config set max_message_size=?, max_serviceinfo_size=?, replacement_rvInfo=?, rv_blob=?, wait_seconds=? where id=?
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="systemResourceFileTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.029">
+    <system-out><![CDATA[11:57:57.531 [INFO ] Uploaded File: ssl.p12to SystemResource Table
+Hibernate: select s1_0.name,s1_0.data from system_resource s1_0 where s1_0.name=?
+Hibernate: insert into system_resource (data, name) values (?, ?)
+Hibernate: select s1_0.name,s1_0.data from system_resource s1_0 where s1_0.name=?
+11:57:57.546 [INFO ] Uploaded File: mfg.p12to SystemResource Table
+Hibernate: select s1_0.name,s1_0.data from system_resource s1_0 where s1_0.name=?
+Hibernate: insert into system_resource (data, name) values (?, ?)
+Hibernate: select s1_0.name,s1_0.data from system_resource s1_0 where s1_0.name=?
+Hibernate: delete from system_resource where name=?
+Hibernate: select s1_0.name,s1_0.data from system_resource s1_0 where s1_0.name=?
+11:57:57.555 [WARN ] SVI resource file not found.
+]]></system-out>
+  </testcase>
+  <testcase name="systemResourceTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="0.024">
+    <system-out><![CDATA[Hibernate: select s1_0.id,s1_0.data from system_package s1_0 where s1_0.id=?
+Hibernate: insert into system_package (data, id) values (?, ?)
+Hibernate: select s1_0.id,s1_0.data from system_package s1_0 where s1_0.id=?
+11:57:57.576 [ERROR] Received invalid SVI instruction.
+11:57:57.580 [ERROR] Received invalid SVI instruction.
+]]></system-out>
+  </testcase>
+  <testcase name="zipDiSampleTest" classname="org.fidoalliance.fdo.protocol.ApiTest" time="1.701">
+    <system-out><![CDATA[11:57:57.584 [INFO ] Device Serial No:0
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+11:57:57.663 [INFO ] Type 10 [h'850A0161306A44656D6F44657669636558D33081D0307902010030173115301306035504030C0C46646F456E746974792043413059301306072A8648CE3D020106082A8648CE3D030107034200040B834978B4B7CD29D7A1C834114BB52C7A413ED59412ED957772E62B7B077AC8E41351260E3F0440BB1042DE11268FBB40B480916D5DC9EE997A6A89DE2AE1EDA000300A06082A8648CE3D040302034700304402206E81EB56E9207180306DFCB80929EE61A21FE28D3267F70EB3CBBAD27450F10C02202A035644C91CE63EF8183C2E9D465DFB8905E8CA53BC6C776BD3352AC542DC20']
+11:57:57.685 [INFO ] Type 10 [h'850A0161306A44656D6F44657669636558D33081D0307902010030173115301306035504030C0C46646F456E746974792043413059301306072A8648CE3D020106082A8648CE3D030107034200040B834978B4B7CD29D7A1C834114BB52C7A413ED59412ED957772E62B7B077AC8E41351260E3F0440BB1042DE11268FBB40B480916D5DC9EE997A6A89DE2AE1EDA000300A06082A8648CE3D040302034700304402206E81EB56E9207180306DFCB80929EE61A21FE28D3267F70EB3CBBAD27450F10C02202A035644C91CE63EF8183C2E9D465DFB8905E8CA53BC6C776BD3352AC542DC20']
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: insert into certificate_data (data, name) values (?, ?)
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: update certificate_data set data=? where name=?
+Hibernate: select c1_0.id,c1_0.days from certificate_validity c1_0 where c1_0.id=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: select r1_0.id,r1_0.data from rv_data r1_0 where r1_0.id=?
+Hibernate: insert into protocol_session (created_on, data, name) values (?, ?, ?)
+11:57:58.819 [INFO ] Type 11 [h'861865501C8DF9B57D09421AA4433C81F5393CF78184820245447F00000182054A693132372E302E302E31820343191F90820443191F906A44656D6F446576696365830A01585B3059301306072A8648CE3D020106082A8648CE3D03010703420004F596E1E787698C10B6EEB58D059A3EAA7BD14744E937A0553CCBD88BBCE5AEFDE85582B811E1E13EF86A964C32622E7AB88457C7945F93A1D8E779929A9D59CF822F582061DDD1D11DD377AA3527730ED7C1BA1BD599BF509E053255164ED26BFA50C38D']
+11:57:58.825 [INFO ] Type 11 [h'861865501C8DF9B57D09421AA4433C81F5393CF78184820245447F00000182054A693132372E302E302E31820343191F90820443191F906A44656D6F446576696365830A01585B3059301306072A8648CE3D020106082A8648CE3D03010703420004F596E1E787698C10B6EEB58D059A3EAA7BD14744E937A0553CCBD88BBCE5AEFDE85582B811E1E13EF86A964C32622E7AB88457C7945F93A1D8E779929A9D59CF822F582061DDD1D11DD377AA3527730ED7C1BA1BD599BF509E053255164ED26BFA50C38D']
+11:57:59.081 [INFO ] Type 12 [[5, h'2E386FEDCEF99AB46A132230944B26A3F5D6A3B67BE3FDEB500B1155A1660F6B']]
+11:57:59.083 [INFO ] Type 12 [[5, h'2E386FEDCEF99AB46A132230944B26A3F5D6A3B67BE3FDEB500B1155A1660F6B']]
+Hibernate: select p1_0.name,p1_0.created_on,p1_0.data from protocol_session p1_0 where p1_0.name=?
+Hibernate: select null,m1_0.created_on,m1_0.data from manufactured_voucher m1_0 where m1_0.serial_no=?
+Hibernate: insert into manufactured_voucher (created_on, data, serial_no) values (?, ?, ?)
+Hibernate: select o1_0.id,o1_0.max_message_size,o1_0.max_serviceinfo_size,o1_0.replacement_rvInfo,o1_0.rv_blob,o1_0.wait_seconds from onboarding_config o1_0 where o1_0.id=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+Hibernate: select c1_0.name,c1_0.data from certificate_data c1_0 where c1_0.name=?
+11:57:59.245 [INFO ] Onboarding Voucher GUID is : 1c8df9b5-7d09-421a-a443-3c81f5393cf7
+11:57:59.268 [INFO ] Voucher auto injected for guid:1c8df9b5-7d09-421a-a443-3c81f5393cf7
+Hibernate: insert into rv_redirect (created_on, data, expiry, guid) values (?, ?, ?, ?)
+Hibernate: insert into onboarding_voucher (created_on, data, replacement, to0_expiry, to2_completed_on, guid) values (?, ?, ?, ?, ?, ?)
+Hibernate: select p1_0.name,p1_0.created_on,p1_0.data from protocol_session p1_0 where p1_0.name=?
+Hibernate: delete from protocol_session where name=?
+11:57:59.276 [INFO ] Type 13 []
+11:57:59.276 [INFO ] Type 13 []
+11:57:59.278 [INFO ] DI complete, GUID is 1c8df9b5-7d09-421a-a443-3c81f5393cf7
+11:57:59.279 [INFO ] ===== FDO DI SUCCESS =====
+11:57:59.282 [INFO ] Triggering TO0 for GUID: 1c8df9b5-7d09-421a-a443-3c81f5393cf7
+Hibernate: select o1_0.guid,o1_0.created_on,o1_0.data,o1_0.replacement,o1_0.to0_expiry,o1_0.to2_completed_on from onboarding_voucher o1_0 where o1_0.guid=?
+]]></system-out>
+  </testcase>
+</testsuite>

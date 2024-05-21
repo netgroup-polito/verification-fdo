@@ -1,0 +1,24 @@
+# Copyright 2022 Intel Corporation
+# SPDX-License-Identifier: Apache 2.0
+
+version: "3.3"
+
+services:
+
+  pri-fdo-device:
+    image: pri-fdo-device
+    container_name: pri-fdo-device
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - _JAVA_OPTIONS
+    restart: "no"
+    volumes:
+      - ./app-data:/home/fdo/app-data 
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+    mem_limit: 500m
+    mem_reservation: 200m
+    cpu_shares: 1024

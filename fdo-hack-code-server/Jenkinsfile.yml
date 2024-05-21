@@ -1,0 +1,81 @@
+// This job will be restricted to run only on 'ubuntu18.04-OnDemand' Build machine
+node('ubuntu18.04-OnDemand'){
+
+  // Stage for checking out the source code
+  stage('scm checkout'){
+    cleanWs()
+    checkout scm
+  }
+
+  // Stage to build the project
+  stage('build'){
+    sh 'mvn clean install'
+    print "Archive the artifacts"
+    sh 'cd component-samples && tar -czvf demo.tar.gz demo && mv demo.tar.gz ..'
+    archiveArtifacts artifacts: 'demo.tar.gz', fingerprint: true, allowEmptyArchive: false
+  }
+
+ try
+ {
+   // Run the smoke test
+   stage('Run Smoke test')
+   {
+
+     // Checking out the smoke test code
+     checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'test-fidoiot']], userRemoteConfigs: [[credentialsId: 'sdo-automationgithubtoken', url: 'https://github.com/secure-device-onboard/test-fidoiot']]])
+
+     // Creating the required directories
+     sh '''
+       mkdir -p test-fidoiot/binaries
+       mkdir -p test-fidoiot/binaries/pri-fidoiot
+     '''
+
+     // Extract and copy the demo.tar content to the location
+     sh '''
+       cp -r component-samples/demo/* test-fidoiot/binaries/pri-fidoiot
+       cp -r test-fidoiot/binaries/pri-fidoiot/device/* test-fidoiot/
+     '''
+
+     // Generating Keys and Copying it back.
+     sh '''
+       cd test-fidoiot/binaries/pri-fidoiot/scripts
+       bash demo_ca.sh
+       bash web_csr_req.sh
+       bash user_csr_req.sh
+       bash keys_gen.sh
+       chmod -R 777 secrets/
+       cp -r service.env secrets/ ../aio/
+       cp -r secrets/ ../db/
+       sed -i '/<security-constraint>/,/<.security-constraint>/d' ../aio/WEB-INF/web.xml
+       sed -i '/^innodb/d' ../db/custom/config-file.cnf  
+    '''
+
+     // Setting the TEST_DIR and executing smoke test
+     sh'''
+       cd test-fidoiot
+       export TEST_DIR=`pwd`
+       mvn clean test -Dgroups=fdo_pri_smoketest
+     '''
+   }
+ }
+ finally
+ {
+   // Remove the files
+   print "Removing the files"
+   sh'''
+     rm -f test-fidoiot/credential.bin
+     rm -f test-fidoiot/ext_voucher
+     rm -f test-fidoiot/guid
+     rm -f test-fidoiot/linux64.sh
+     rm -f test-fidoiot/payload.bin
+     rm -f test-fidoiot/result.txt
+   '''
+
+   print "Pruning docker containers"
+   sh'''
+     docker system prune -a -f
+   '''
+ }
+//Clean workspace after build is successfull
+cleanWs cleanWhenFailure: false, cleanWhenNotBuilt: false, notFailBuild: true
+}

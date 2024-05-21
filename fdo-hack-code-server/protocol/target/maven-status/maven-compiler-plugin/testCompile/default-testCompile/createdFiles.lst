@@ -1,0 +1,17 @@
+org/fidoalliance/fdo/protocol/SerializationTest.class
+org/fidoalliance/fdo/protocol/DiagnosticTest.class
+org/fidoalliance/fdo/protocol/ManufacturingInfoTest.class
+org/fidoalliance/fdo/protocol/HibernateTest.class
+org/fidoalliance/fdo/protocol/GuidTest.class
+org/fidoalliance/fdo/protocol/HashTest.class
+org/fidoalliance/fdo/protocol/VoucherTest.class
+org/fidoalliance/fdo/protocol/DeviceInitTest.class
+org/fidoalliance/fdo/protocol/DiSample.class
+org/fidoalliance/fdo/protocol/CoseEcTest.class
+org/fidoalliance/fdo/protocol/ApiTest.class
+org/fidoalliance/fdo/protocol/TestDatabaseServer.class
+org/fidoalliance/fdo/protocol/TestHmacFunction.class
+org/fidoalliance/fdo/protocol/OwnerPublicKeyTest.class
+org/fidoalliance/fdo/protocol/TestCredentialConsumer.class
+org/fidoalliance/fdo/protocol/RendezvousInfoTest.class
+org/fidoalliance/fdo/protocol/CertChainTest.class

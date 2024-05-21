@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.19">
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/FileKeyStoreInputStream.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpOwnerSchemeSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/CertChainBuilder.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpServer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/AlgorithmFinder.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpInstruction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardReplacementKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpUtils.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/DebugExceptionConsumer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/DatabaseServer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/PemFormatter.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/KeyExchangeResult.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/VoucherUtils.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidJwtTokenException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidOwnerSignException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StorageException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardDatabaseServer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/OnDieCertSignatureFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardOwnerSchemeSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/CredentialReuseException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/BufferUtils.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardExceptionConsumer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardCertSignatureFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/CertificateType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidOwnershipVoucherException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardCryptoService.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/PemProvider.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardSessionCleaner.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardAcceptOwnerFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/OnDieCertificateManager.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardVoucherReplacementFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardKeyStoreInputStream.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/To0Scheduler.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSysInstruction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/ReuseVoucherReplacementFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardKeyStoreOutputStream.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardVoucherQueryFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/OnboardConfigSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardValidityDaysSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/ServiceInfoHttpClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSimWebGetOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardRvBlobStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/AutoInjectVoucherStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardRendezvousInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardReplacementVoucherStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/HibernateUtil.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/BasicServiceInfoClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardRendezvousWaitSecondsSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSysModuleExtra.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/ConformanceOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardServiceInfoDocumentSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardRvBlobQueryFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSimCommandOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardOwnerInfoSizeSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSimCsrOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardServerSessionManager.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/TrustedRendezvousAcceptFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSimDownloadOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSysOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardServiceInfoClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardExtraInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/To2BlobSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/StandardVoucherStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/db/FdoSimUploadOwnerModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/DispatchException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/MessageBodyException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/Mapper.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardMessageDispatcher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/LoggerService.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/KeyResolver.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidIpAddressException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/HttpClient.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/AcceptOwnerFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RendezvousDelaySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/CwtKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/DeviceCredentialSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ServiceInfoModule.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RendezvousInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/DeviceCredentialConsumer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/KeyStoreOutputStreamFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RendezvousWaitSecondsSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ReplacementVoucherStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/CertSignatureFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/VoucherStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/OwnerKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/SessionManager.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/CredReuseFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ValidityDaysSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ServiceInfoSendFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/CryptoService.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/VoucherQueryFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/MessageDispatcher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/OwnerInfoSizeSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ServiceInfoDocumentSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/HmacFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ManufacturerKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/MaxServiceInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ManufacturerInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ExtraInfoSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/VoucherReplacementFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/DeviceKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/KeyStoreInputStreamFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ReplacementKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RvBlobQueryFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/ExceptionConsumer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RendezvousAcceptFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/dispatch/RvBlobStorageFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardTrustManager.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardCwtKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/CloseableKey.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/PemLoader.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/DispatchMessage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidMessageException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardHttpServer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/LogProviderFactory.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/ProtocolServlet.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/ProtocolInfoDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/ManufacturingInfoSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseProtectedHeaderSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/SerializerUtils.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseUnprotectedHeaderDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CertChainSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/GuidDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/GenericListSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseUnprotectedHeaderSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/DevModListSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/NonceSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/RendezvousInstructionDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CertChainDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseKeyDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/GuidSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/NullValueSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/AnyTypeSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/EatPayloadBaseDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/DevModListDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/SimpleStorageDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/AnyTypeDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/EatPayloadBaseSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/TaggedItem.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/To2AddressEntryDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CwtTokenDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/NonceDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseProtectedHeaderDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CwtTokenSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/GenericArraySerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/RendezvousInstructionSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/CoseKeySerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/SimpleStorageSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/ProtocolInfoSerializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serialization/ManufacturingInfoDeserializer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardOwnerKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/ResourceNotFoundException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/LogProvider.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/EcdhKex.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CoseKey.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2Done2.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ExternalRv.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/Hash.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ProtocolInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnershipVoucherEntryPayload.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/Encrypt0.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ErrorMessage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0d.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SetHmac.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/PublicKeyType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousVariable.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/DiDone.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SigInfoType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/EncStructure.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/DeviceServiceInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0OwnerSign2.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoKeyValuePair.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnershipVoucherHeader.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/EncryptionState.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CwtToken.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2ProveDevicePayload.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2RedirectEntry.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/HashType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2SetupDevicePayload.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0AcceptOwner.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2AddressEntries.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnershipVoucherEntries.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SigInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/DevModList.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/EotResult.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/DeviceCredential.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CoseKeyCurveType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnerPublicKey.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2OwnerInfoReady.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/HelloDevice.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2AddressEntry.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnershipVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/HelloRvAck.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2NextEntry.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2GetNextEntry.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ErrorCode.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ManufacturingInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousMedium.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CoseSign1.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/KeySizeType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/AnyType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0OwnerSign.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/PublicKeyEncoding.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/Nonce.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoDocument.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/Mac0.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/AsymKex.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/KexMessage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2Done.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ProtocolVersion.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0HelloAck.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/OwnerServiceInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/KexParty.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CborTags.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SetCredentials.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CoseUnprotectedHeader.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2DeviceInfoReady.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/HelloRv.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To0Hello.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoQueue.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoModuleList.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoGlobalState.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SimpleStorage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/TransportProtocol.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/AppStart.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/EatPayloadBase.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/MsgType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousInstruction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To2ProveHeaderPayload.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CoseProtectedHeader.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousProtocol.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CryptoKey.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousConstant.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CipherSuiteType.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/ServiceInfoModuleState.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/To1dPayload.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/SigStructure.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/RendezvousDirective.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CertChain.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/CwtTo1Id.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/Guid.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/StatusCb.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/NullValue.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/DiffieHellman.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/message/StreamMessage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardTo0Client.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/Config.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardManufacturerKeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/UntrustedRendezvousAcceptFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/SelfSignedHttpClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardHttpClientSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/Log4jProvider.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InvalidGuidException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/OwnerSchemesSupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/EpidService.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/FileKeyStoreOutputStream.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/OnboardingVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/OnboardingConfig.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/SystemPackage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/VoucherAlias.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/RvRedirect.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/RvData.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/ProtocolSession.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/ManufacturedVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/AllowDenyList.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/SystemResource.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/OnDieCertificateData.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/CertificateData.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/ConformanceData.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/entity/CertificateValidity.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/PemKeyStoreImpl.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/KeySupplier.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serviceinfo/DevMod.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serviceinfo/FdoSys.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serviceinfo/FidoAlliance.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/serviceinfo/StandardServiceInfoSendFunction.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/InternalServerErrorException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/UnsupportedMediaTypeException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/RvInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/NotFoundException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/OnDie.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/Logs.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/CertificateValidityApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/MessageSizeApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/SviSizeApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/BadRequestException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/EntityTooLargeException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/To2Blob.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/RestApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/InteropVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/DenyList.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/SviPackage.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/HealthApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/ResellApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/AllowList.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/To0Starter.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/RestApiServlet.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/SystemResourceApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/OwnerVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/CertificateApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/DeviceInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/AioRvInfo.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/DeviceStateApi.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/InternalServerErrorException.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/api/MfgVoucher.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/StandardLogProvider.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/EmbeddedDatabaseServer.java">
+</file>
+<file name="/home/simone/Scrivania/fdo-hack-code/protocol/src/main/java/org/fidoalliance/fdo/protocol/RemoteDatabaseServer.java">
+</file>
+</checkstyle>

@@ -1,0 +1,14 @@
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/CoseEcTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/ManufacturingInfoTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/DeviceInitTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/SerializationTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/HashTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/ApiTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/RendezvousInfoTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/HibernateTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/CertChainTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/OwnerPublicKeyTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/GuidTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/DiSample.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/DiagnosticTest.java
+/home/simone/Scrivania/fdo-hack-code/protocol/src/test/java/org/fidoalliance/fdo/protocol/VoucherTest.java

@@ -1,0 +1,23 @@
+#Mon Feb 12 11:58:34 CET 2024
+configuration*?=41A10A4B91F7F611AF113925F41C57B3EA56F8D7
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSimCommandDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/DeviceApp.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FileKeyStoreOutputStream.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FileKeyStoreInputStream.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FileCredentialConsumer.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/StandardDeviceKeySupplier.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSimUploadDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/RootConfig.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSimWebGetDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSysDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSimCsrDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FdoSimDownloadDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/UnsupportedCredReuseFunction.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/DeviceValidityDays.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/StandardHmacFunction.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/FileCredentialSupplier.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/ConformanceDeviceModule.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/StandardMaxServiceInfoSupplier.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/DeviceConfig.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/StandardCredReuseFunction.java=1706794809000
+/home/simone/Scrivania/fdo-hack-code/component-samples/device/src/main/java/org/fidoalliance/fdo/sample/StandardDeviceModule.java=1706794809000
